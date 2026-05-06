@@ -1,0 +1,578 @@
+/* Font Integration - Ensure files are in your project folder */
+@font-face {
+    font-family: 'NexaBold';
+    src: url('Nexa-Bold.otf');
+}
+@font-face {
+    font-family: 'NexaRegular';
+    src: url('Nexa-Regular.otf');
+}
+
+:root {
+    --bg-dark: #000000;
+    --bg-red: #A52F2C;
+    --accent: #FF9500;
+    --text-grey: #969696;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    /* Precise Linear Gradient Angle based on Figma Analysis */
+    background: linear-gradient(-100deg, var(--bg-red) 0%, var(--bg-dark) 80%, var(--bg-dark) 100%);
+    background-attachment: fixed;
+    color: white;
+    font-family: 'NexaRegular', sans-serif;
+    min-height: 100vh;
+}
+
+/* 1. The Hidden States */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-100px); /* Slide from left */
+    transition: all 0.8s ease-out;
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(100px); /* Slide from right */
+    transition: all 0.8s ease-out;
+}
+
+/* 2. The Visible State (Active) */
+.reveal-active {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+/* 3. Staggering (Optional: makes elements slide one after another) */
+.delay-1 { transition-delay: 0.2s; }
+.delay-2 { transition-delay: 0.4s; }
+
+/* Initial hidden state (moved down 100px) */
+.reveal-bottom {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: all 1.0s ease-out; /* Slightly slower for a "heavy" section feel */
+}
+
+/* Final visible state (reusing your existing active class logic) */
+.reveal-bottom.reveal-active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+/* Header with 50% Opacity and Shadow */
+header {
+    width: 100%;
+    height: 80px;
+    background: rgba(0, 0, 0, 0.5); /* Black with 50% opacity */
+    box-shadow: 0 10px 40px 10px rgba(0, 0, 0, 0.25); /* Figma Drop Shadow */
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    padding: 0 8%;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.logo img { height: 60px; }
+
+nav ul { display: flex; list-style: none; gap: 40px; }
+/* Default state for all links */
+/* Default state */
+nav ul li a {
+    text-decoration: none;
+    color: #ffffff; 
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+/* Hover state */
+nav ul li a:hover {
+    color: #FF9500;
+}
+
+/* Active state - stays orange while on section */
+nav ul li a.active {
+    color: #FF9500 !important;
+}
+
+/* Hover and Active states */
+nav ul li a:hover, nav ul li a.active {
+    color: var(--accent);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* This ensures that when you click a link, the section doesn't hide under the header */
+#home, #about {
+    scroll-margin-top: 100px;
+}
+
+/* Hero Layout */
+.hero {
+    padding-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-container {
+    display: flex;
+    width: 85%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.content-left { width: 55%; }
+
+.main-title {
+    font-size: 60px;
+    font-family: 'NexaRegular', sans-serif; /* Per your request: Regular not bold */
+    margin-bottom: 5px;
+    line-height: 1.1;
+}
+
+.highlight { color: var(--accent); }
+
+.sub-description {
+    color: var(--text-grey);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 30px 0;
+    max-width: 550px;
+}
+
+/* Icon Grouping */
+.footer-row { display: flex; gap: 100px; margin-top: 50px; }
+.footer-row h3 { font-size: 14px; letter-spacing: 2px; margin-bottom: 20px; color: white; }
+.icon-group { display: flex; gap: 15px; }
+
+.icon-link {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.icon-link:hover {
+    background: var(--accent);
+    transform: translateY(-5px);
+}
+
+/* Image Wrapper with Figma Drop Shadow */
+.content-right { width: 40%; display: flex; justify-content: flex-end; }
+.image-wrapper {
+    width: 350px;
+    height: 600px;
+    overflow: hidden;
+    box-shadow: 0 10px 70px 30px rgba(0, 0, 0, 0.35); /* Specific Image Shadow */
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* About Section Styling */
+.about-section {
+    padding: 240px 8%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
+}
+
+.about-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    gap: 80px;
+}
+
+/* Left Side Logo Styling */
+.about-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-image img {
+    max-width: 300px; /* Adjust based on your logo size */
+    width: 100%;
+    height: 300px;
+}
+
+/* Right Side Content Styling */
+.about-content {
+    flex: 1.2;
+}
+
+.about-title {
+    font-family: 'NexaRegular', sans-serif;
+    font-size: 60px;
+    color: var(--accent); /* FF9500 from your variables */
+    margin-bottom: 30px;
+}
+
+.about-text p {
+    font-family: 'NexaRegular', sans-serif;
+    color: var(--text-grey); /* Main text is white to match Figma */
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    text-align: justify;
+    opacity: 0.9; /* Slight softness to the text white */
+}
+
+/* Responsive adjustment for tablets/mobile */
+@media (max-width: 992px) {
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .about-image img {
+        max-width: 250px;
+    }
+    .about-text p {
+        text-align: center;
+    }
+}
+
+.portfolio-section {
+    padding: 100px 0;
+    text-align: center;
+    /* Ensure only the active area is visible */
+    width: 100%;
+    overflow: hidden;
+}
+
+.section-title {
+    font-family: 'NexaRegular';
+    font-size: 60px;
+    color:#FF9500;
+    margin-bottom: 50px;
+    padding-left: 8%;
+    text-align: left;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    stroke: none; /* Explicitly remove any inherited strokes */
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 500px;
+}
+
+/* New: Perspective applied to the wrapper */
+.carousel-stage {
+    position: relative;
+    width: 100%;
+    max-width: 1200px; /* Adjust based on your preferred stage size */
+    height: 120%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1500px; /* Stronger perspective for 3D effect */
+    overflow: hidden; /* Important: Hides the extreme side cards */
+}
+
+/* Track is now stacked, not horizontal */
+.carousel-track {
+    position: absolute;
+    width: 350px; /* Match single card width */
+    height: 450px;
+    transform-style: preserve-3d;
+    transition: transform 0.5s ease;
+    /* Center the track in the stage */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Card Base Styles */
+.project-card {
+    text-decoration: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 350px;
+    height: 450px;
+    background: rgba(0, 0, 0, 0.6); /* Black with 50% opacity */
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    /* Smooth transitions for moving between states */
+    transition: transform 0.5s ease, opacity 0.5s ease, z-index 0.5s ease, box-shadow 0.5s ease;
+    
+    /* Default: In the back, faded */
+    opacity: 0.6;
+    transform: translateZ(-200px) scale(0.85);
+    z-index: 1;
+    pointer-events: none; /* Can't interact with background cards */
+}
+
+/* Active / Center Card Logic */
+.project-card.active {
+    opacity: 1;
+    z-index: 10;
+    pointer-events: auto; /* Active card is interactive */
+    /* Your specific Figma shadow for the active card */
+    box-shadow: 0 5px 30px 10px rgba(0, 0, 0, 0.35);
+    /* Transform managed by JS */
+}
+
+/* Special Case for adjacent cards (Left/Right) */
+.project-card.prev,
+.project-card.next {
+    opacity: 0.6;
+    z-index: 5;
+    /* Transform managed by JS */
+}
+
+.image-holder {
+    width: 100%;
+    height: 250px;
+    background: #D9D9D9; /* Placeholder grey */
+    border-radius: 15px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.image-holder img { width: 100%; height: 100%; object-fit: cover; }
+
+.project-label {
+    display: block;
+    color: var(--accent);
+    font-size: 14px;
+    font-family: 'NexaRegular';
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.project-desc {
+    color: white;
+    font-size: 16px;
+    font-family: 'NexaRegular';
+    text-align: left;
+    line-height: 1.4;
+    transition: font-size 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Hover Effect: Scale font from 16px to 18px */
+.project-card:hover .project-desc {
+    font-size: 18px;
+    color: #FF9500; /* Subtle orange glow on hover */
+}
+
+/* Ensure images don't block clicks */
+.image-holder img {
+    pointer-events: none;
+}
+/* Navigation & Dots */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 30; /* Over everything */
+    transition: 0.3s;
+}
+
+.left-btn { left: 8%; }
+.right-btn { right: 8%; }
+.nav-btn:hover { color: var(--accent); }
+
+/* Centering the Dots exactly below the center card */
+.pagination-dots {
+    position:absolute;
+    bottom: -10%; /* Adjust this to move them closer/further from card */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    z-index: 30;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.dot.active { background: white; width: 12px; height: 12px; }
+
+
+.contact-section {
+    padding: 130px 8%;
+    background: transparent;
+}
+
+.section-header {
+    margin-bottom: 60px;
+    text-align: left;
+}
+
+.section-header .subtitle {
+    color: #FF9500;
+    letter-spacing: 2px;
+    font-size: 60px;
+    font-family: 'Nexa-Bold', sans-serif;
+}
+
+.section-header .title {
+    font-size: 30px;
+    color: white;
+    margin-top: 10px;
+    font-family: 'NexaRegular';
+}
+
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 50px;
+}
+
+/* Info Card Style */
+.contact-info-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 50px;
+    display: flex;
+    width: 350px;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden; /* This prevents elements from sliding "outside" the card */
+}
+.contact-info-card .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Keeps everything centered horizontally */
+    text-align: center; /* Centers the text below the logo */
+    width: 100%;
+}
+.contact-info-card .thumbnail {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centers the image wrapper */
+    margin-bottom: 20px;
+}
+
+.contact-info-card .thumbnail img {
+    width: 150px; /* Set a specific width so it's not "wide" */
+    height: 150px; /* Keep it square or proportional */
+    object-fit: contain; /* Prevents stretching; keeps the logo's shape */
+    transition: transform 0.5s ease, filter 0.5s ease; /* Controlled transition */
+    filter: grayscale(100%);
+}
+
+/* To stop the sliding: We ensure the hover only affects 
+   the scale or filter, NOT the position */
+.contact-info-card:hover .thumbnail img {
+    filter: grayscale(0%);
+    transform: scale(1.05); /* Slight zoom instead of sliding */
+}
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+    color: #ccc;
+}
+
+.detail-item i { color: #FF9500; }
+
+/* Form Styles */
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form-group label {
+    font-size: 12px;
+    color: #888;
+    letter-spacing: 1px;
+}
+
+.form-group input, .form-group textarea {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    color: white;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    border-color: #FF9500;
+}
+
+.submit-btn {
+    background: #FF9500;
+    color: black;
+    border: none;
+    padding: 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 149, 0, 0.3);
+}
